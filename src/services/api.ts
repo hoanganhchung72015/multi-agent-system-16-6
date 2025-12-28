@@ -1,25 +1,41 @@
+
 import { Subject, AIResult } from '../types';
 
-// Lấy link Backend từ cấu hình Environment Variables của Vercel
-const BASE_URL = import.meta.env.VITE_API_URL;
+// Thay bằng URL thật của bạn trên Render sau khi bạn deploy backend
+const RENDER_API_URL = 'https://multi-agent-system-16-6.onrender.com';
 
 export const api = {
-  solveProblem: async (subject: Subject, image?: string, voiceText?: string): Promise<AIResult> => {
+  solveProblem: async (
+    subject: Subject, 
+    image?: string, 
+    voiceText?: string
+  ): Promise<AIResult> => {
+    
     try {
-      // Gọi chính xác vào đường dẫn /solve của Render
-      const response = await fetch(`${BASE_URL}/solve`, {
+      const response = await fetch(RENDER_API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subject, image, voiceText }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          subject,
+          image,      // Dữ liệu ảnh Base64
+          voiceText,  // Văn bản từ giọng nói (nếu có)
+        }),
       });
 
       if (!response.ok) {
-        throw new Error('Server Render đang bận hoặc lỗi');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Các chuyên gia đang thực hiện trao đổi');
       }
 
-      return await response.json();
+      const data = await response.json();
+      
+      // Giả sử server trả về đúng cấu trúc { expert1, expert2, expert3 }
+      return data as AIResult;
+      
     } catch (error) {
-      console.error("Lỗi kết nối AI:", error);
+      console.error("Lỗi API:", error);
       throw error;
     }
   }
