@@ -2,7 +2,7 @@
 import { Subject, AIResult } from '../types';
 
 // Thay bằng URL thật của bạn trên Render sau khi bạn deploy backend
-const RENDER_API_URL = 'https://giaibaitap-backend.onrender.com/';
+const RENDER_API_URL = 'https://multi-agent-system-16-6.onrender.com';
 
 export const api = {
   solveProblem: async (
@@ -39,4 +39,5 @@ export const api = {
       throw error;
     }
   }
+
 };
