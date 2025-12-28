@@ -10,6 +10,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
+    "types": ["vite/client"], // Thêm dòng này nếu chưa có
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,4 +23,5 @@
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
+
 }
