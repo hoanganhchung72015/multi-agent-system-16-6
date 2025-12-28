@@ -14,8 +14,7 @@ app.post('/solve', async (req, res) => {
   const { subject, image, voiceText } = req.body;
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
     // 1. Chuẩn bị nội dung gửi cho Gemini
     const prompt = `
       Bạn là một hệ thống gia sư AI đa chuyên gia cho môn ${subject}.
@@ -68,4 +67,5 @@ app.post('/solve', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => console.log(`Backend chạy tại port ${PORT}`));
