@@ -5,7 +5,7 @@ import { Subject, AIResult } from '../types';
  * Ưu tiên lấy từ biến môi trường Vercel (VITE_API_URL).
  * Nếu không có, sẽ dùng link Render mặc định của bạn.
  */
-const BASE_URL = (import.meta as any).env?.VITE_API_URL || 'https://multi-agent-system-16-6.onrender.com';
+const BASE_URL = (import.meta as any).env?.VITE_API_URL || 'https://multi-agent-system-16-6-1.onrender.com';
 
 export const api = {
   solveProblem: async (
@@ -53,3 +53,4 @@ export const api = {
     }
   }
 };
+
