@@ -10,7 +10,9 @@ const DiaryView: React.FC<DiaryViewProps> = ({ onBack }) => {
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
 
   useEffect(() => {
-    setEntries(storage ());
+    // SỬA TẠI ĐÂY: Gọi storage.getDiary() thay vì storage()
+    const data = storage.getDiary();
+    setEntries(data);
   }, []);
 
   return (
@@ -36,12 +38,13 @@ const DiaryView: React.FC<DiaryViewProps> = ({ onBack }) => {
                 {item.subject}
               </span>
             </div>
+            {/* Hiển thị một phần đáp án của chuyên gia 1 */}
             <p className="text-sm font-bold text-gray-800 truncate">
-              Đáp án: {item.result.expert1}
+              Đáp án: {item.result.expert1.substring(0, 50)}...
             </p>
             <button 
               className="mt-2 text-xs text-indigo-500 underline"
-              onClick={() => alert("Xem chi tiết tính năng đang phát triển")}
+              onClick={() => alert("Chi tiết: " + item.result.expert1)}
             >
               Xem lại chi tiết
             </button>
